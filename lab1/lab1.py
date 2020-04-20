@@ -26,6 +26,8 @@ def make_arrays(x0, x1, h):
 array_of_x,  array_of_y = make_arrays(0, 3, 0.3)
 
 polynom = lagrange(array_of_x, array_of_y)
-print(str(F(3, 0) - F(0, 0)))
-print(format(quad(spline_func, 0, 3)))
-print(format(quad(polynom, 0, 3))) 
+print('Integral of f(x): ' + str(F(3, 0) - F(0, 0)))
+y, _ = quad(spline_func, 0, 3)
+print('Integral of spline: ' + str(y))
+y, _ = quad(polynom, 0, 3)
+print('Integral of polynom: ' + str(y)) 
