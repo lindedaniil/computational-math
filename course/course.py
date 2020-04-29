@@ -1,4 +1,4 @@
-#from math import *
+import numpy
 from numpy import cos, sqrt,exp, pi
 from scipy.integrate import quad
 import matplotlib.pyplot as plt
@@ -9,12 +9,10 @@ def f(x):
 def solve( a, b ):
     while (abs(a-b) > 1e-5):
         c = (a+b)/2
-
         if (f(a) * f(c) < 0):
             b = c
         else:
             a = c
-
     return c
 
 def f2( z ):
@@ -29,12 +27,6 @@ def min( a, b ):
             b = x2
         else:
             a = x1
-    #while (abs(a-b) > 1e-5):
-     #   c = (a + b) / 2
-      #  if f2(a) > f2(c):
-     #       a = c
-    #    else:
-     #       b = c
     return (a+b)/2
 
 def computingLambda():
@@ -51,23 +43,23 @@ def eff(t,l1,l2):
     return quad(under_integr, l1, l2)
 
 l1, l2 = computingLambda()
-#l1, l2 = 0.00004, 0.000077
+#l1, l2 = 0.00008, 0.000014
 print(l1,l2)
 
-xx = []
-yy = []
-yy2 = []
+list_of_t = []
+list_of_res = []
+list_of_err = []
 
 t = 1000
 while (t <= 9000):
     res, err = eff(t, l1, l2)
-    print( "t: " + str(t) + "\te: " + str(res) + "\teff: " + str(err) )
-    xx.append( t )
-    yy.append( res )
-    yy2.append( err )
-    t = t + 1000
+    list_of_t.append( t )
+    list_of_res.append( res )
+    list_of_err.append( err )
+    if t % 1000 == 0:
+        print( "t: " + str(t) + "\tres: " + str(res) + "\terr: " + str(err) )
+    t = t + 100
 
-plt.plot(xx, yy)
-plt.plot(xx, yy2)
-print(xx,'\n',yy,'\n',yy2)
+plt.plot(list_of_t, list_of_res)
+plt.plot(list_of_t, list_of_err)
 plt.show()
