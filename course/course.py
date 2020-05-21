@@ -1,10 +1,11 @@
 import numpy
-from numpy import cos, sqrt,exp, pi
+from numpy import cos, sqrt,exp, pi, tan, tanh
 from scipy.integrate import quad
 import matplotlib.pyplot as plt
 
 def f(x):
-    return cos( pi * x / 2 ) - 2 * sqrt(x)
+    #return cos( pi * x / 2 ) - 2 * sqrt(x)
+    return tan(x) + tanh(x)
 
 def solve( a, b ):
     while (abs(a-b) > 1e-5):
@@ -13,6 +14,7 @@ def solve( a, b ):
             b = c
         else:
             a = c
+    print(f(c), c)
     return c
 
 def f2( z ):
@@ -30,7 +32,7 @@ def min( a, b ):
     return (a+b)/2
 
 def computingLambda():
-    y =  solve( 0, 1 )
+    y =  solve( 0, 50 )
     l1 = y * 31.66675 * 1e-5
     z = min(-2, -1)
     l2 = -z * 3.039830 * 1e-5
